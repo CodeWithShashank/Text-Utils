@@ -18,10 +18,7 @@ export default function TextForm(props) {
         props.showAlert("Text cleared!", "success");
     }
     const handleCopyClick = () => {
-        let textInside = document.getElementById("myBox");
-        textInside.select();
-        navigator.clipboard.writeText(textInside.value);
-        document.getSelection().removeAllRanges();
+        navigator.clipboard.writeText(text);
         props.showAlert("Text copied to clipboard!", "success");
     }
     const handleExtraSpacesClick = () => {
@@ -49,7 +46,7 @@ export default function TextForm(props) {
             </div>
             <div className="container my-3" style={{ color: props.mode === 'light' ? '#042743' : 'white' }}>
                 <h2>Your text summary:</h2>
-                <p>{text.split(" ").filter(word => word.length).length} words and {text.length} characters.</p>
+                <p>{text.split(/\s+/).filter(word => word.length).length} words and {text.length} characters.</p>
                 <p>{0.008 * text.split(" ").filter(word => word.length).length} minutes are required to read this text (as per 125wpm).</p>
                 <h3>Preview</h3>
                 <p>{text.length > 0 ? text : "Nothing to preview!"}</p>
